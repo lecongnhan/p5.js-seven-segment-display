@@ -8,11 +8,37 @@ class SevenSegment{
         this._offset = offset;
         this._onColor = onColor;
         this._offColor = offColor;
-
+        
+        this._initSegments();
+        this._initEncodings();
+    }
+    show(digit){
+        this._update(digit);
+        for (let i = 0; i < this._segments.length; i++)
+            this._segments[i].show();
+    }
+    _update(digit){
+        let encoding = this._encodings[digit];
+        
+        for (let i = 0; i < 7; i++)
+            this._segments[i].turn((encoding >> (6 - i)) & 1)
+        this._dp.turn(false);
+    }
+    _createSegment(x, y, isHorizontal){
+        return new Segment(
+            x,
+            y,
+            this._segmentLongSide * isHorizontal + this._segmentShortSide * !isHorizontal, 
+            this._segmentLongSide * !isHorizontal + this._segmentShortSide * isHorizontal, 
+            this._onColor,
+            this._offColor
+        );
+    }
+    _initSegments(){
         this._segments = [];
 
         this._a = this._createSegment(
-            this._x + this._segmentShortSide + offset,
+            this._x + this._segmentShortSide + this._offset,
             this._y,
             true
         );
@@ -63,18 +89,23 @@ class SevenSegment{
         this._segments.push(this._g);
         this._segments.push(this._dp);
     }
-    show(){
-        for (let i = 0; i < this._segments.length; i++)
-            this._segments[i].show();
-    }
-    _createSegment(x, y, isHorizontal){
-        return new Segment(
-            x,
-            y,
-            this._segmentLongSide * isHorizontal + this._segmentShortSide * !isHorizontal, 
-            this._segmentLongSide * !isHorizontal + this._segmentShortSide * isHorizontal, 
-            this._onColor,
-            this._offColor
-        );
+    _initEncodings(){
+        this._encodings = {};
+        this._encodings['0'] = 0x7E;
+        this._encodings['1'] = 0x30;
+        this._encodings['2'] = 0x6D;
+        this._encodings['3'] = 0x79;
+        this._encodings['4'] = 0x33;
+        this._encodings['5'] = 0x5B;
+        this._encodings['6'] = 0x5F;
+        this._encodings['7'] = 0x70;
+        this._encodings['8'] = 0x7F;
+        this._encodings['9'] = 0x7B;
+        this._encodings['A'] = 0x77;
+        this._encodings['b'] = 0x1F;
+        this._encodings['C'] = 0x4E;
+        this._encodings['d'] = 0x3D;
+        this._encodings['E'] = 0x4F;
+        this._encodings['F'] = 0x47;
     }
 }

@@ -16,4 +16,7 @@ class DecimalPoint{
 
         ellipse(this._x, this._y, this._radius * 2, this._radius * 2);
     }
+    turn(isOn){
+        this._isOn = isOn;
+    }
 }
