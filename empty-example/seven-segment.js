@@ -46,6 +46,13 @@ class SevenSegment{
             this._y + this._segmentShortSide     + this._segmentLongSide     + this._offset * 2,
             true
         );
+        this._dp = new DecimalPoint(
+            this._x + this._segmentShortSide * 2 + this._segmentLongSide     + this._offset * 3,
+            this._y + this._segmentShortSide * 3 + this._segmentLongSide * 2 + this._offset * 4 - this._decimalPointRadius  * 2,
+            this._decimalPointRadius,
+            this._onColor,
+            this._offColor
+        )
         
         this._segments.push(this._a);
         this._segments.push(this._b);
@@ -54,6 +61,7 @@ class SevenSegment{
         this._segments.push(this._e);
         this._segments.push(this._f);
         this._segments.push(this._g);
+        this._segments.push(this._dp);
     }
     show(){
         for (let i = 0; i < this._segments.length; i++)
