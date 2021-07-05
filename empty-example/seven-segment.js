@@ -1,3 +1,5 @@
+const N_SEGMENTS = 7;
+
 class SevenSegment{
     constructor(x, y, segmentShortSide, segmentLongSide, decimalPointRadius, offset, onColor, offColor){
         this._x = x;
@@ -19,9 +21,11 @@ class SevenSegment{
     }
     _update(digit){
         let encoding = this._encodings[digit];
-        
-        for (let i = 0; i < 7; i++)
-            this._segments[i].turn((encoding >> (6 - i)) & 1)
+
+        // this is getting the nth bit of a number
+        // reference: https://codeforwin.org/2016/01/c-program-to-get-value-of-nth-bit-of-number.html
+        for (let i = 0; i < N_SEGMENTS; i++)
+            this._segments[i].turn((encoding >> (N_SEGMENTS - i - 1)) & 1)
         this._dp.turn(false);
     }
     _createSegment(x, y, isHorizontal){
@@ -91,6 +95,8 @@ class SevenSegment{
     }
     _initEncodings(){
         this._encodings = {};
+
+        // referenve: https://en.wikipedia.org/wiki/Seven-segment_display#Hexadecimal
         this._encodings['0'] = 0x7E;
         this._encodings['1'] = 0x30;
         this._encodings['2'] = 0x6D;

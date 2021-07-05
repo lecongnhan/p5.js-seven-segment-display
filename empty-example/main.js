@@ -19,7 +19,7 @@ function setup() {
   background(BACKGROUND_COLOR);
   ON_COLOR = color(255, 0, 0);
   OFF_COLOR = color(255, 255, 255);
-  frameRate(1);
+  frameRate(2);
 
   sevenSegment = new SevenSegment(
     5, 

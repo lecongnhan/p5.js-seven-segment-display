@@ -10,6 +10,7 @@ class Segment{
         this._offColor = offColor;
     }
     show(){
+        noStroke();
         if (this._isOn)
             fill(this._onColor);
         else
